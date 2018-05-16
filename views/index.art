@@ -1,0 +1,24 @@
+<!--
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+-->
+
+<% extend('./layout.art') %>
+  <% block('content', function(){ %>
+    <h1>{{h1}}</h1>
+    <p> Welcome to {{title}} </p>
+    <input type="file" name="file" id="file">
+    <button type="button" id="upload">Upload</button>
+    <script>
+      // console.log(axios)
+      document.getElementById('upload').addEventListener('click', function () {
+        const formdata = new FormData()
+        formdata.append('file', document.getElementById('file').files[0])
+        axios.post('/upload', formdata).then(res => console.log(res))
+      }, false)
+
+    </script>
+    <% }) %>
